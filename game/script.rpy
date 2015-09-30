@@ -11,7 +11,6 @@
 #   ejemplo.
 define e = Character('Eileen', color="#c8ffc8")
 
-
 init python:
   from complex import complex
   import pygame_sdl2 as pygame

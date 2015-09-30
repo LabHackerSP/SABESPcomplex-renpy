@@ -3,7 +3,7 @@
 
 from renpygame.locals import *
 import renpygame as pygame
-import sys, os, string
+import sys, os, string, renpy
 # local
 import cli, pygtext
 
@@ -24,9 +24,10 @@ class Game:
     self.cursor_state = True
     
     #self.basedir = 'sabesp'
-    self.basedir = ''
-    self.curdir = ''
+    #self.basedir = os.path.join(os.path.dirname(os.path.realpath(__file__)),'sabesp')
+    self.basedir = os.path.abspath(os.path.join(renpy.config.basedir, 'complex', 'sabesp'))
     #os.chdir(self.basedir)
+    self.curdir = ''
   
   def slowtext(self, text):
     self.stdout.prompt_enable = False

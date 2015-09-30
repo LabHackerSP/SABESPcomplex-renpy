@@ -57,6 +57,13 @@ docs/_build/
 # PyBuilder
 target/
 
-# backups
+# backups & tmp
 *.*~
 *.*bak
+log.txt
+traceback.txt
+tmp*
+
+# cache & save
+game/cache*
+game/save*

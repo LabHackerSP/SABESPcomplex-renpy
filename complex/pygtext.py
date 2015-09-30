@@ -24,7 +24,7 @@ class Pygfile(object):
       self.table = string.maketrans(inkey,shifted)
     
   def write(self, text):
-    self.buff.append(text)
+    self.buff.append(text.decode('UTF-8'))
     
   def flush(self):
     pass

@@ -27,10 +27,14 @@ class Cli(object):
     return self.makepath() + self.prompt + self.value + ('_' if cursor else ' ')
     
   def makepath(self, path='', absolute=False):
-    return os.path.normpath(os.path.join(os.getcwd() if absolute else '', self.parent.curdir, path))
+    return os.path.normpath(os.path.join(self.parent.basedir if absolute else '', self.parent.curdir, path))
     
   def chpath(self, path):
-    self.parent.curdir = os.path.normpath(os.path.join(self.parent.curdir, path))
+    tgtdir = os.path.normpath(os.path.join(self.parent.curdir, path))
+    if os.path.isdir(os.path.join(self.parent.basedir, tgtdir)):
+      self.parent.curdir = tgtdir
+    else:
+      raise
   
   def parse(self, inp):
     spl = inp.split(' ')
@@ -99,17 +103,19 @@ class Parser(object):
       #implementar cd sem argumento
       return
     cdpath = self.parent.makepath(args[0])
-    passfile = os.path.join(cdpath, '.pass')
+    abspath = self.parent.makepath(args[0], True)
+    passfile = os.path.join(abspath, '.pass')
     if os.path.isfile(passfile):
       with open(passfile, 'r') as f:
         password = f.read().split('\n')[0]
       if len(args) < 2 or args[1] != password:
         print('Senha incorreta!')
         return
-    if os.path.isdir(cdpath) and os.path.dirname(os.path.relpath(cdpath,os.getcwd()))[0:2] != '..':
-      self.parent.chpath(args[0])
-    else:
-      print('cd: O diretório \"%s\" não existe.' % args[0])
+    if cdpath[0:2] != '..':
+      try:
+        self.parent.chpath(args[0])
+      except:
+        print('cd: O diretório \"%s\" não existe.' % args[0])
   
   def emptyline(self, args):
     pass
