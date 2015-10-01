@@ -23,8 +23,8 @@ label start:
     
     python:
       pygame.init()
-      terminal = complex.Game()
-      terminal.main(['yes'])
+      terminal = complex.Game('level1')
+      terminal.main()
       
     e "bbbbb!"
     

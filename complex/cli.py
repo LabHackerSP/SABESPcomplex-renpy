@@ -24,7 +24,7 @@ class Cli(object):
       self.table = string.maketrans(inkey,shifted)
   
   def makeprompt(self, cursor):
-    return self.makepath() + self.prompt + self.value + ('_' if cursor else ' ')
+    return ''.join([self.parent.player, '@', self.makepath(), self.prompt, self.value, ('_' if cursor else ' ')])
     
   def makepath(self, path='', absolute=False):
     return os.path.normpath(os.path.join(self.parent.basedir if absolute else '', self.parent.curdir, path))

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 from renpygame.locals import *
@@ -11,23 +10,25 @@ import cli, pygtext
 USEREVENT_BLINK_CURSOR = USEREVENT
 
 class Game:
-  def __init__(self):
+  def __init__(self, basedir='sabesp'):
+    self.cursor_state = True
+    self.basedir = os.path.abspath(os.path.join(renpy.config.basedir, 'complex', basedir))
+    self.curdir = ''
+    
+    try:
+      with open(os.path.join(self.basedir, '.info')) as f:
+        self.player = f.readline()[:-1]
+    except:
+      self.player = 'dummy'
+  
     pygame.init()
     pygame.display.init()
     self.screen = pygame.display.set_mode((800, 600))
     font = pygame.font.SysFont('monospace', 18)
-#    font = pygame.font.Font(None, 18)
     pygame.key.set_repeat(200,50)
+    
     sys.stdout = self.stdout = pygtext.Pygfile(font, parent=self)
-    
     self.terminal = cli.Cli(self)
-    self.cursor_state = True
-    
-    #self.basedir = 'sabesp'
-    #self.basedir = os.path.join(os.path.dirname(os.path.realpath(__file__)),'sabesp')
-    self.basedir = os.path.abspath(os.path.join(renpy.config.basedir, 'complex', 'sabesp'))
-    #os.chdir(self.basedir)
-    self.curdir = ''
   
   def slowtext(self, text):
     self.stdout.prompt_enable = False
@@ -38,7 +39,7 @@ class Game:
       pygame.time.wait(20 if c != '.' else 500)
     self.stdout.prompt_enable = True
 
-  def main(self, argv):
+  def main(self):
     cursor_state = True
     pygame.time.set_timer(USEREVENT_BLINK_CURSOR, 500)
 
@@ -57,7 +58,3 @@ class Game:
       # show it on the screen
       self.stdout.display(self.screen)
       pygame.display.flip()
-
-if __name__ == '__main__':
-  game = Game()
-  game.main(sys.argv[1:])

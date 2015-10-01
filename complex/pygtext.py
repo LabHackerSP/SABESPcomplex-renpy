@@ -12,16 +12,8 @@ class Pygfile(object):
       font = pygame.font.SysFont('monospace', 10)
     self.font = font
     self.buff = []
-    #self.restricted = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!"#$%&\\\'()*+,-./:;<=>?@[\]^_`{|}~'
     self.prompt_enable = prompt_enable
     self.parent = parent
-    
-    inkey   = '123457890-=/;\'[]\\'
-    shifted = '!@#$%&*()_+?:\"{}|'
-    try:
-      self.table = str.maketrans(inkey,shifted)
-    except:
-      self.table = string.maketrans(inkey,shifted)
     
   def write(self, text):
     self.buff.append(text.decode('UTF-8'))
@@ -46,7 +38,6 @@ class Pygfile(object):
       else:
         n1 = ng
     return [ text[0:ng] ] + self._splitline(text[ng:], maxwidth)
-        
 
   def display(self, surf):
     '''Show the printed output on the given surface'''
@@ -79,6 +70,3 @@ class Pygfile(object):
   def clear(self):
     '''Clear the buffer (and thus the display)'''
     self.buff = []
-
-def shifted(char, table):
-    return char.translate(table).upper()
