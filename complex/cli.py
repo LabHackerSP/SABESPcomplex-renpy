@@ -87,6 +87,7 @@ class Cli(object):
 class Parser(object):
   def __init__(self, parent=None):
     self.parent = parent
+    self.game = self.parent.parent
   
   def do_exit(self, args):
     pygame.event.post(pygame.event.Event(pygame.QUIT))
@@ -104,18 +105,25 @@ class Parser(object):
       return
     cdpath = self.parent.makepath(args[0])
     abspath = self.parent.makepath(args[0], True)
-    passfile = os.path.join(abspath, '.pass')
-    if os.path.isfile(passfile):
+    lockfile = os.path.join(abspath, '.lock')
+    if os.path.isfile(lockfile):
       with open(passfile, 'r') as f:
-        password = f.read().split('\n')[0]
-      if len(args) < 2 or args[1] != password:
-        print('Senha incorreta!')
+        user = f.read().split('\n')[0]
+      if self.game.player != user:
+        print('Este diretório é acessivel apenas a: ' + user)
         return
     if cdpath[0:2] != '..':
       try:
         self.parent.chpath(args[0])
       except:
         print('cd: O diretório \"%s\" não existe.' % args[0])
+        
+  def do_login(self, args):
+    for u in self.game.users:
+      if args[0] == u[0] and args[1] == u[1]:
+        self.game.player = u[0]
+        return
+    print('Usuário ou senha incorretas!')
   
   def emptyline(self, args):
     pass

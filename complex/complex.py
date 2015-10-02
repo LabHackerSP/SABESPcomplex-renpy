@@ -3,6 +3,7 @@
 from renpygame.locals import *
 import renpygame as pygame
 import sys, os, string, renpy
+from backports import configparser
 # local
 import cli, pygtext
 
@@ -11,15 +12,15 @@ USEREVENT_BLINK_CURSOR = USEREVENT
 
 class Game:
   def __init__(self, basedir='sabesp'):
-    self.cursor_state = True
     self.basedir = os.path.abspath(os.path.join(renpy.config.basedir, 'complex', basedir))
     self.curdir = ''
     
-    try:
-      with open(os.path.join(self.basedir, '.info')) as f:
-        self.player = f.readline()[:-1]
-    except:
-      self.player = 'dummy'
+    config = configparser.ConfigParser()
+    config.readfp(open(os.path.join(self.basedir,'.info')))
+    self.player = config.get('General', 'user')
+    self.users = []
+    for u in config.options('Users'):
+      self.users = self.users + [ [ u, config.get('Users', u) ] ]
   
     pygame.init()
     pygame.display.init()
@@ -40,7 +41,7 @@ class Game:
     self.stdout.prompt_enable = True
 
   def main(self):
-    cursor_state = True
+    self.cursor_state = True
     pygame.time.set_timer(USEREVENT_BLINK_CURSOR, 500)
 
     while True:

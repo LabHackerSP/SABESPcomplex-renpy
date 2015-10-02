@@ -1,1 +1,6 @@
-player
+[General]
+user=fred
+
+[Users]
+admin=1234
+erin=lol

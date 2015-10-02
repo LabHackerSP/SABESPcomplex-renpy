@@ -12,8 +12,8 @@
 define e = Character('Eileen', color="#c8ffc8")
 
 init python:
-  from complex import complex
   import pygame_sdl2 as pygame
+  from complex import complex
 
 # The game starts here.
 # - El juego comienza aquí.
