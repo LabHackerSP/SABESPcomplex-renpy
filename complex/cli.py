@@ -107,7 +107,7 @@ class Parser(object):
     abspath = self.parent.makepath(args[0], True)
     lockfile = os.path.join(abspath, '.lock')
     if os.path.isfile(lockfile):
-      with open(passfile, 'r') as f:
+      with open(lockfile, 'r') as f:
         user = f.read().split('\n')[0]
       if self.game.player != user:
         print('Este diretório é acessivel apenas a: ' + user)
