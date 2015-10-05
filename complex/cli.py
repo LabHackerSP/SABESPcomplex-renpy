@@ -16,6 +16,7 @@ class Cli(object):
     self.ctrl = False
     self.parser = Parser(self)
     
+    # transformação para shift
     inkey   = '123457890-=/;\'[]\\'
     shifted = '!@#$%&*()_+?:\"{}|'
     try:
@@ -23,12 +24,15 @@ class Cli(object):
     except:
       self.table = string.maketrans(inkey,shifted)
   
+  # retorna string de prompt
   def makeprompt(self, cursor):
     return ''.join([self.parent.player, '@', self.makepath(), self.prompt, self.value, ('_' if cursor else ' ')])
     
+  # retorna pasta atual
   def makepath(self, path='', absolute=False):
     return os.path.normpath(os.path.join(self.parent.basedir if absolute else '', self.parent.curdir, path))
     
+  # muda pasta atual
   def chpath(self, path):
     tgtdir = os.path.normpath(os.path.join(self.parent.curdir, path))
     if os.path.isdir(os.path.join(self.parent.basedir, tgtdir)):
@@ -36,6 +40,7 @@ class Cli(object):
     else:
       raise
   
+  # chama comando do parser
   def parse(self, inp):
     spl = inp.split(' ')
     command = spl[0]
@@ -46,11 +51,13 @@ class Cli(object):
       function = getattr(self.parser, command)
     except:
       #print('Comando não reconhecido')
+      # se o comando não existe no parser, manda pro shell
       function = getattr(self.parser, 'shell')
       function(inp)
     else:
       function(args)
   
+  # recebe evento pygame e atualiza entrada de texto
   def updateinput(self, events):
     '''Update the input based on passed events'''
     for event in events:
@@ -118,6 +125,8 @@ class Parser(object):
       except:
         print('cd: O diretório \"%s\" não existe.' % args[0])
         
+  # comando de login
+  # dá pra fazer com um prompt de senha?
   def do_login(self, args):
     for u in self.game.users:
       if args[0] == u[0] and args[1] == u[1]:
@@ -128,6 +137,7 @@ class Parser(object):
   def emptyline(self, args):
     pass
     
+  # manda comando como shell
   def shell(self, line):
     try:
 #      output = subprocess.check_output(line, shell=True, timeout=2, stderr=subprocess.STDOUT, cwd=self.parent.makepath(absolute=True))
