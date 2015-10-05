@@ -4,7 +4,7 @@ from renpygame.locals import *
 import argparse, sys, os, subprocess, string
 import renpygame as pygame
 
-class Cli(object):
+class Cli:
   def __init__(self, parent=None):
     self.parent = parent
     sys.stdout = parent.stdout
@@ -91,6 +91,23 @@ class Cli(object):
           if event.key in range(32,126): self.value += chr(event.key).translate(self.table).upper()
     #if len(self.value) > self.maxlength and self.maxlength >= 0: self.value = self.value[:-1]
     
+class Login(Cli):
+  def __init__(self, parent, old_cli, login):
+    Cli.__init__(self, parent)
+    self.login = login
+    self.old_cli = old_cli
+  
+  def makeprompt(self, cursor):
+    return "Senha: " + ('_' if cursor else ' ')
+    
+  def parse(self, inp):
+    self.parent.terminal = self.old_cli
+    for u in self.parent.users:
+      if self.login == u[0] and inp == u[1]:
+        self.parent.player = u[0]
+        return
+    print('Usuário ou senha incorretas!')
+    
 class Parser(object):
   def __init__(self, parent=None):
     self.parent = parent
@@ -128,11 +145,8 @@ class Parser(object):
   # comando de login
   # dá pra fazer com um prompt de senha?
   def do_login(self, args):
-    for u in self.game.users:
-      if args[0] == u[0] and args[1] == u[1]:
-        self.game.player = u[0]
-        return
-    print('Usuário ou senha incorretas!')
+    inp = Login(self.game, self.parent, args[0])
+    self.game.terminal = inp
   
   def emptyline(self, args):
     pass
