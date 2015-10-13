@@ -23,16 +23,12 @@ class Game:
     self.users = []
     for u in config.options('Users'):
       self.users = self.users + [ [ u, config.get('Users', u) ] ]
-    
-    # defaults pygame
+
     pygame.init()
-    pygame.display.init()
-    self.screen = pygame.display.set_mode((800, 600))
-    font = pygame.font.SysFont('monospace', 18)
-    pygame.key.set_repeat(200,50)
-    
-    # modulos
-    sys.stdout = self.stdout = pygtext.Pygfile(font, parent=self)
+    self.font = pygame.font.SysFont('monospace', 18)
+
+    # modulos    
+    sys.stdout = self.stdout = pygtext.Pygfile(self.font, parent=self)      
     self.terminal = cli.Cli(self)
   
   def slowtext(self, text):
@@ -45,6 +41,11 @@ class Game:
     self.stdout.prompt_enable = True
 
   def main(self):
+    # defaults pygame
+    pygame.init()
+    pygame.display.init()
+    self.screen = pygame.display.set_mode((800, 600))
+    pygame.key.set_repeat(200,50)
     self.cursor_state = True
     pygame.time.set_timer(USEREVENT_BLINK_CURSOR, 500)
 

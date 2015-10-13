@@ -143,7 +143,6 @@ class Parser(object):
         print('cd: O diretório \"%s\" não existe.' % args[0])
         
   # comando de login
-  # dá pra fazer com um prompt de senha?
   def do_login(self, args):
     inp = Login(self.game, self.parent, args[0])
     self.game.terminal = inp
