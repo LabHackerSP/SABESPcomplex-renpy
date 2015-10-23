@@ -1,5 +1,6 @@
 [General]
 user=fred
+motd=Isto é um terminal bom dia !!!!!!
 
 [Users]
 admin=1234

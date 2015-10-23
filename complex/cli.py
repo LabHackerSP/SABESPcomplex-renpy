@@ -121,7 +121,7 @@ class Parser(object):
   #slowtext
   #isso é mais pra debug, tirar no jogo final
   def do_slowtext(self, args):
-    self.parent.parent.slowtext(' '.join(args) + '\n')
+    self.game.slowtext(' '.join(args) + '\n')
   
   #change directory
   #checa por .pass dentro do diretório para 'senha'
@@ -144,7 +144,7 @@ class Parser(object):
       except:
         print('cd: O diretório \"%s\" não existe.' % args[0])
       else:
-        self.parent.loadconf()
+        self.game.loadconf()
         
   # comando de login
   def do_login(self, args):

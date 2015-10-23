@@ -2,7 +2,7 @@
 
 from renpygame.locals import *
 import renpygame as pygame
-import sys, os, string, renpy
+import sys, os, string, renpy, codecs
 from backports import configparser
 # local
 import cli, pygtext
@@ -19,7 +19,6 @@ class Game:
     
     self.users = []
     self.objectives = []
-    self.loadconf()
 
     pygame.init()
     self.font = pygame.font.SysFont('monospace', 24)
@@ -30,19 +29,22 @@ class Game:
     
   def loadconf(self):
     # carrega arquivo .info da pasta
-    config = configparser.ConfigParser()
-    config.readfp(open(os.path.join(self.basedir, self.curdir, '.info')))
-    if config.has_section('General'):
-      self.player = config.get('General', 'user')
-    #if reset == True: self.users = []
-    if config.has_section('Users'):
-      self.users = []
-      for u in config.options('Users'):
-        self.users = self.users + [ [ u, config.get('Users', u) ] ]
+    path = os.path.join(self.basedir, self.curdir, '.info')
     self.objectives = []
-    if config.has_section('Objectives'):
-      for u in config.options('Objectives'):
-        self.objectives = self.objectives + [ [ u, config.get('Objectives', u) ] ]
+    if os.path.exists(path):
+      config = configparser.ConfigParser()
+      config.readfp(codecs.open(path, "r", "utf8"))
+      if config.has_section('General'):
+        if config.has_option('General', 'user'): self.player = config.get('General', 'user')
+        if config.has_option('General', 'motd'): print(config.get('General', 'motd').encode('UTF-8'))
+      #if reset == True: self.users = []
+      if config.has_section('Users'):
+        self.users = []
+        for u in config.options('Users'):
+          self.users = self.users + [ [ u, config.get('Users', u) ] ]
+      if config.has_section('Objectives'):
+        for u in config.options('Objectives'):
+          self.objectives = self.objectives + [ [ u, config.get('Objectives', u) ] ]
   
   def slowtext(self, text):
     self.stdout.prompt_enable = False
@@ -61,6 +63,8 @@ class Game:
     pygame.key.set_repeat(200,50)
     self.cursor_state = True
     pygame.time.set_timer(USEREVENT_BLINK_CURSOR, 500)
+    
+    self.loadconf()
 
     while True:
       # watch for events
