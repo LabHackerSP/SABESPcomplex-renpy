@@ -73,7 +73,7 @@ class Game:
         if event.type == QUIT:
           return 0
         elif event.type == USEREVENT_CUSTOM_QUIT:
-          return event.code
+          return int(event.code)
         elif event.type == USEREVENT_BLINK_CURSOR:
           self.terminal.cursor = '_' if self.cursor_state else ' '
           self.cursor_state = not self.cursor_state
