@@ -14,8 +14,6 @@ class Cli:
     self.cmdbuf_index = 0
     self.prompt = '> '
     self.value = ''
-    self.shift = False
-    self.ctrl = False
     self.parser = Parser(self)
     
     # transformação para shift
@@ -70,13 +68,10 @@ class Cli:
   def updateinput(self, events):
     '''Update the input based on passed events'''
     for event in events:
-      if event.type == KEYUP:
-        if event.key == K_LSHIFT or event.key == K_RSHIFT: self.shift = False
-        if event.key == K_LCTRL or event.key == K_RCTRL: self.ctrl = False
       if event.type == KEYDOWN:
         if event.key == K_RETURN:
           # add input to buffer, send input to terminal, clear input
-          self.cmdbuf = [ self.value ] + self.cmdbuf
+          if len(self.cmdbuf) < 1 or self.cmdbuf[0] != self.value: self.cmdbuf = [ self.value ] + self.cmdbuf
           self.cmdbuf_index = 0
           print(self.makeprompt(False))
           #self.terminal.onecmd(self.stdout.value)
@@ -89,15 +84,13 @@ class Cli:
           self.cmdbuf_index -= 1 if self.cmdbuf_index > 0 else 0
           self.value = self.cmdbuf[self.cmdbuf_index - 1] if self.cmdbuf_index > 0 else ''
         elif event.key == K_BACKSPACE: self.value = self.value[:-1]
-        elif event.key == K_LSHIFT or event.key == K_RSHIFT: self.shift = True
-        elif event.key == K_LCTRL or event.key == K_RCTRL: self.ctrl = True
-        if self.ctrl:
+        if event.mod & KMOD_CTRL:
           # ctrl-c clears input line
           if event.key == K_c: self.value = ''
-        elif not self.shift:
-          if event.key in range(32,126): self.value += chr(event.key)
-        elif self.shift:
+        elif event.mod & KMOD_SHIFT:
           if event.key in range(32,126): self.value += chr(event.key).translate(self.table).upper()
+        else:
+          if event.key in range(32,126): self.value += chr(event.key)
     #if len(self.value) > self.maxlength and self.maxlength >= 0: self.value = self.value[:-1]
     
 class Login(Cli): #prompt de login
