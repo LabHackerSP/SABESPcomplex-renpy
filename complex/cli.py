@@ -4,6 +4,8 @@ from renpygame.locals import *
 import argparse, sys, os, subprocess, string
 import renpygame as pygame
 
+USEREVENT_CUSTOM_QUIT = USEREVENT+1
+
 class Cli:
   def __init__(self, parent=None):
     self.parent = parent
@@ -42,6 +44,13 @@ class Cli:
   
   # chama comando do parser
   def parse(self, inp):
+    #checa se é objetivo
+    for u in self.parent.objectives:
+      if " ".join(inp.split()) == u[0]: #ignora espaços repetidos
+        event = pygame.event.Event(USEREVENT_CUSTOM_QUIT, code=u[1])
+        pygame.event.post(event)
+    
+    #parsing normal
     spl = inp.split(' ')
     command = spl[0]
     args = spl[1:]
@@ -91,7 +100,7 @@ class Cli:
           if event.key in range(32,126): self.value += chr(event.key).translate(self.table).upper()
     #if len(self.value) > self.maxlength and self.maxlength >= 0: self.value = self.value[:-1]
     
-class Login(Cli):
+class Login(Cli): #prompt de login
   def __init__(self, parent, old_cli, login):
     Cli.__init__(self, parent)
     self.login = login
@@ -101,7 +110,7 @@ class Login(Cli):
     return "Senha: " + ('_' if cursor else ' ')
     
   def parse(self, inp):
-    self.parent.terminal = self.old_cli
+    self.parent.terminal = self.old_cli #volta para prompt quando função retornar
     for u in self.parent.users:
       if self.login == u[0] and inp == u[1]:
         self.parent.player = u[0]
@@ -141,11 +150,14 @@ class Parser(object):
         self.parent.chpath(args[0])
       except:
         print('cd: O diretório \"%s\" não existe.' % args[0])
+      else:
+        self.parent.loadconf()
         
   # comando de login
   def do_login(self, args):
-    inp = Login(self.game, self.parent, args[0])
-    self.game.terminal = inp
+    if(args.length > 0):
+      inp = Login(self.game, self.parent, args[0])
+      self.game.terminal = inp
   
   def emptyline(self, args):
     pass

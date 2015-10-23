@@ -9,6 +9,7 @@ import cli, pygtext
 
 # event constants
 USEREVENT_BLINK_CURSOR = USEREVENT
+USEREVENT_CUSTOM_QUIT = USEREVENT+1
 
 class Game:
   def __init__(self, basedir='sabesp'):
@@ -16,20 +17,32 @@ class Game:
     self.basedir = os.path.abspath(os.path.join(renpy.config.basedir, 'complex', basedir))
     self.curdir = ''
     
-    # carrega arquivo .info da pasta
-    config = configparser.ConfigParser()
-    config.readfp(open(os.path.join(self.basedir,'.info')))
-    self.player = config.get('General', 'user')
     self.users = []
-    for u in config.options('Users'):
-      self.users = self.users + [ [ u, config.get('Users', u) ] ]
+    self.objectives = []
+    self.loadconf()
 
     pygame.init()
-    self.font = pygame.font.SysFont('monospace', 18)
+    self.font = pygame.font.SysFont('monospace', 24)
 
     # modulos    
     sys.stdout = self.stdout = pygtext.Pygfile(self.font, parent=self)      
     self.terminal = cli.Cli(self)
+    
+  def loadconf(self):
+    # carrega arquivo .info da pasta
+    config = configparser.ConfigParser()
+    config.readfp(open(os.path.join(self.basedir, self.curdir, '.info')))
+    if config.has_section('General'):
+      self.player = config.get('General', 'user')
+    #if reset == True: self.users = []
+    if config.has_section('Users'):
+      self.users = []
+      for u in config.options('Users'):
+        self.users = self.users + [ [ u, config.get('Users', u) ] ]
+    self.objectives = []
+    if config.has_section('Objectives'):
+      for u in config.options('Objectives'):
+        self.objectives = self.objectives + [ [ u, config.get('Objectives', u) ] ]
   
   def slowtext(self, text):
     self.stdout.prompt_enable = False
@@ -54,7 +67,9 @@ class Game:
       events = pygame.event.get()
       for event in events:
         if event.type == QUIT:
-          return
+          return 0
+        elif event.type == USEREVENT_CUSTOM_QUIT:
+          return event.code
         elif event.type == USEREVENT_BLINK_CURSOR:
           self.terminal.cursor = '_' if self.cursor_state else ' '
           self.cursor_state = not self.cursor_state

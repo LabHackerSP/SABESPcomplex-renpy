@@ -4,3 +4,7 @@ user=fred
 [Users]
 admin=1234
 erin=lol
+
+[Objectives]
+cd atlantis=1
+cd diretoria=1
