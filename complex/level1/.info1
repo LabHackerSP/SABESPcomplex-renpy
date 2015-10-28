@@ -13,6 +13,11 @@ motd=Cão Raposa:
 
   Você olhou no relógio? Agora deve faltar só 29:30 para completar esse desafio
 
+[Users]
+cadelaraposa=derf
+admin=senha
+diretor=atlantis
+
 [Objectives]
 cd atlantis=1
 cd diretoria=1

@@ -12,10 +12,11 @@ USEREVENT_BLINK_CURSOR = USEREVENT
 USEREVENT_CUSTOM_QUIT = USEREVENT+1
 
 class Game:
-  def __init__(self, basedir='sabesp'):
+  def __init__(self, basedir='sabesp', mode=''):
     # pasta base da fase, default para sabesp
     self.basedir = os.path.abspath(os.path.join(renpy.config.basedir, 'complex', basedir))
     self.curdir = ''
+    self.mode = mode
     
     self.users = []
     self.objectives = []
@@ -29,7 +30,7 @@ class Game:
     
   def loadconf(self):
     # carrega arquivo .info da pasta
-    path = os.path.join(self.basedir, self.curdir, '.info')
+    path = os.path.join(self.basedir, self.curdir, '.info'+self.mode)
     self.objectives = []
     if os.path.exists(path):
       config = configparser.ConfigParser()

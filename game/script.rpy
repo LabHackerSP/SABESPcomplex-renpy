@@ -87,7 +87,7 @@ label login:
 
   python:
     pygame.init()
-    terminal = complex.Game('level1a')
+    terminal = complex.Game('level1','1')
     terminal_label = 'term_level1a'
     
 label login_sub:
@@ -114,7 +114,7 @@ label term_level1a:
     
     python:
       pygame.init()
-      terminal = complex.Game('level1b')
+      terminal = complex.Game('level1','2')
       terminal_label = 'term_level1b'
       
     jump level1b
@@ -131,12 +131,98 @@ label term_level1b:
     pygame.init()
     ret = terminal.main()
   return
+  
+label copiado:
+  $ button_show = False
+  "Pronto, com esses arquivos copiados você já consegue colocar o dedo na cara da Sabesp e exigir respostas sobre esses 85 milhões. É o suficiente. Se você quiser sair e escapar de qualquer problema possível, faça logout no sistema. Mas por outro lado, você tem a sensação de que perdeu alguma pista em algum lugar."
+  
+  menu:
+    "Log out e matéria dedo na cara":
+      jump go2_materia
+    "Descobrir a senha":
+      # terminal 3
+      python:
+        pygame.init()
+        terminal = complex.Game('level1','3')
+        terminal_label = 'term_level1c'
+      jump level1c
       
+label level1c:
+  "narração pra terminal 3 onde você acessa diretoria denovo"
+  jump level1c
+        
+label term_level1c:
+  python:
+    pygame.init()
+    ret = terminal.main()
+  return
+      
+label copiado2:
+  "Cara, você, um hacker. Rá, vamos ver agora, Sabesp. Com esse documento na mão você tem uma bela de uma matéria. E agora, acha que já tem o suficiente ou ainda vai dar um jeito de abrir aquele atlantis.dir e conhecer todos os segredos do projeto?"
+  "Você precisa decidir rápido."
+  
+  menu:
+    "Ficar até hackear Atlantis":
+      jump go3_prisao
+    "Sair do comp e discretamente sentar em seu lugar":
+      jump sentar
+      
+label sentar:
+  "Você já tem conteúdo suficiente para o maior furo da sua vida e também acha que já abusou da sorte. Discretamente se levanta e deixa aquele computador em paz." 
+  "Pouco depois, três homens de terno negro entram na sala e se dirigem para o computador onde você estava. Procuram ao redor e não sabem o que fazer. Um deles leva a mão até a orelha esquerda e começa a falar alguma coisa, mais ou menos ao mesmo tempo em que a coletiva termina. Todos os jornalistas se levantam ao mesmo tempo e você aproveita a movimentação para sair logo dali."
+  "Promoção da escassez? Que jogo político é esse? Então a seca foi promovida pelo governo estadual? Naquela noite você redige a matéria com fogo nos dedos, certo de que está prestes a desmacarar um grande cartel."
+  "O texto está primoroso e o documento oficial te respalda para fazer a crítica olhando no olho. Você prepara o email para seu editor, mas exita. Não entende porque, mas exita. Será que seu editor publicaria essa matéria? Será que a Folha de São Paulo, o maior jornal do país, compraria uma briga com o governo de SP?"
+  "Então, você se lembra daqueles grupos independentes, A Pública, Ponte, Jornalistas Livres, Outras Palavras. Com certeza eles publicariam, mas teriam alcance suficiente? Hora de tomar uma decisão."
+  
+  menu:
+    "enviar para a Folha de São Paulo":
+      jump go4_folha
+    "enviar para A Pública":
+      jump go5_publica
+  
 label go1_lapquebrado:
   "Você está com uma bateria em cada mão, um pouco confuso. Alguém percebe, você tenta disfarçar e derruba o próprio computador. Leva um tempo até você se recuperar e o resto da história é medíocre."
-   
   "Você utiliza apenas dados do release oficial e conteúdo da internet para fazer a matéria do dia seguinte. Com um pouco de sorte, ninguém percebe como o texto está fraco."
-   
   "Nessa noite você sai para beber com amigos e não fica bêbado. Estranha, bebe mais, e não fica bêbado. Bebe pra caralho e nada. Vai para casa com prejuízo e nenhum samba."
-   
   "Acordo com uma ressaca enorme e um enjôo ainda maior. De repente, toda a noite passada volta com tudo e você corre para vomitar no trono de porcelana. Enquanto está ali, se espanta, são.. letras? Sim, você vomitou letras, letras que dizem PERDEU"
+  
+label go2_materia:
+  "A direção da Sabesp lhe responde que Atlantis é uma pesquisa sobre alternativas para a crise hídrica. Você pede dados dessa pesquisa e recebe dados genéricos como resposta. É tudo obviamente uma farsa. Uma semana depois, você publica a matéria que é capa do caderno Cotidiano. Após a edição de seu texto por seu chefe, Atlantis é publicado como um belo programa de resgate das águas paulistas."
+  "Naquela noite você tenta bater uma punheta antes de dormir, mas brocha um GAME OVER."
+  
+label go3_prisao:
+  "De repente, três homens de terno negro entram na sala e se dirigem rapidamente até você. Fudeu. Assustado, não tem tempo de fazer nada antes de ouvir:"
+   
+  p "Venha com a gente, senhor. Por favor."
+   
+  "Você pensa em responder alguma coisa, levanta o dedo para se defender e.. desiste. Não fala coisa alguma. A sensação de impotência está estampada na sua cara, que se levanta e acompanha os homens."
+  "No dia seguinte, seu próprio jornal estampa a matéria: jornalista preso por suspeita de invadir sistema do governo estadual. Após alguns meses você vai a julgamento e as provas são irrefutáveis, você foi pego em flagrante e agora vai amargar alguns anos horríveis em uma prisão genérica."
+  "A comida é horrível e você demora até se acostumar com o código de honra e força que rege a vida na cela. Com o tempo você adota uma parede e todo dia marca nela um tracinho novo."
+  "Seus colegas de cárcere pensam que você está contando os dias de prisão, mas nenhum deles entende que na verdade você está, aos poucos, com muita paciência, escrevendo uma mensagem no concreto, hábito de jornalista, escrevendo uma mensagem para as gerações futuras, elas precisam saber a verdade, todos precisam saber que você GAME OVER."
+
+label go4_folha:
+  "Mesmo já sendo de madrugada, seu editor te responde em pouco tempo, com uma linha apenas:"
+   
+  e "Fred.. como você conseguiu esse documento?"
+  f "Consegui com uma fonte anônima chamada Cão Raposa, que eu não vou revelar quem é"
+  e "Então, infelizmente não poderemos publicar esse texto. Inclusive, Fred, provavelmente esse conteúdo é ilegal. Recebemos hoje mesmo um contato do governo estadual dizendo que o sistema deles foi hackeado durante a coletiva desta tarde e que qualquer material publicado com aquele conteúdo teria sérias implicações para o jornal."
+  e "Nunca imaginei que você teria relação com isso. Me desculpe. Eu fiz o que deveria fazer, acabei de enviar seu email para eles. Não posso ser cúmplice. Desculpe mesmo. Estou te avisando por companheirismo, porque nos conhecemos há anos. Mas você cometeu um erro primário, deveria saber que não aceitaríamos conteúdo ilegal."
+   
+  "Merda. Merdamerdamerdamerda. Você pensa em fugir, em pegar seus bens mais valiosos colocar tudo numa mochila e fugir para a casa daquela gringa que se mudou para Ibitipoca e foi ser guia turístico quando você visitou o parque há alguns meses."
+  "Britney. É isso. Britney, você lembra dela, loira, gostosona, foi sua guia no último passeio, vocês se amassaram numa curva especialmente linda do rio e ela sempre deixou claro que te receberia por lá sempre que você quisesse voltar. É isso. Britney vai te salvar." 
+  "Enquanto você divaga sobre seu caso norte americando, ouve um carro estacionando bruscamente em sua porta. Olha pela janela e lá estão os mesmos três homens de terno preto que você viu esta tarde na coletiva. Em pouco tempo eles derrubam a porta de sua casa e te levam embora."
+   
+  p "Você é burro?"
+  p2 "Não conhece a hashtag #podemostirarseacharmelhor?"
+  p3 "Shh, não conversem com os mortos"
+   
+  "Seu corpo nunca é encontrado. Os peixes da represa Guarapiranga começam comendo as partes moles do seu rosto. Um fenômeno estranho faz com que um cardume especialmente voraz de manjubinhaa coma a sua pele da bochecha num padrão de mordidas que desenha sua pele, parece, espera, é isso, parece que na sua bochecha esquerda elas escreveram, com os dentes, as palavras GAME OVER."
+
+label go5_publica:
+  "Um sexto sentido pulsa no fundo da sua cabeça. Talvez a Folha de São Paulo esteja envolvida demais com o governo do estado para publicar essa matéria. Talvez seja melhor tentar outro caminho. É, parece que é isso. Chega dessa vida de jornalismo institucional, trabalhar como proletário da notícia para a velha mídia. Hora de mudar."
+  "Você manda a matéria para A Pública e no dia seguinte recebe a resposta positiva. \"Sim, adoramos, vamos publicar! Como você conseguiu esse orçamento?\". A matéria sai impecável e joga merda no ventilador. O governo do estado precisa se explicar em uma série de coletivas."
+  "A resposta oficial diz que \"promoção de escassez\" foi um erro de grafia, o que deveria estar escrito era \"prevenção de escassez\". Farto material de pesquisa corrobora essa afirmação. E afinal, que interesse teria o governo em promover a falta dágua?"
+  "Incrivelmente, essa versão cola junto à velha mídia. Você perde o emprego na Folha de São Paulo e se desespera ao perceber que a versão oficial passa a ser a versão comprada pelos veículos tradicionais. Sua investigação continua por conta própria, mas há pouco que você consegue descobrir sem o acesso facilitado que te permitiu o Cão Raposa."
+  "No fim das contas, você balança levemente a estrutura da Sabesp mas não consegue nenhuma mudança substancial. Bom, pelo menos agora você se tornou um profissional independente com disponibilidade para seguir as pautas que te interessarem." 
+  "O dinheiro é uma merda. A repercussão de seu trabalho é quase nenhuma. Seu impacto no governo estadual tendeu ao zero. Bom, o que você queria? Mudar o mundo com o jornalismo? Faz me rir. Pelo menos agora você dorme melhor e isso é a única coisa que impede as enormes palavras GAME OVER de se formarem sobre sua cabeça quando você dorme e sonha com um mundo diferente. Parabéns por ter se transformado em outra coisa antes que fosse tarde demais."
+
