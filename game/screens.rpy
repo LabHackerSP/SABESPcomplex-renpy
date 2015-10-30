@@ -175,7 +175,6 @@ screen nvl:
 # http://www.renpy.org/doc/html/screen_special.html#main-menu
 
 screen main_menu:
-
     # Esta linea asegura que las otras pantallas de menú son reemplazadas.
     tag menu
 

@@ -1,0 +1,10 @@
+[General]
+user=cadelaraposa
+motd=Você precisa copiar o arquivo precrise2010.doc do seu pendrive de volta para relatorios.
+
+[Users]
+cadelaraposa=derf
+
+[Objectives]
+filecheck relatorios/precrise2010.doc=1
+nfilecheck pendrive/precrise2010.doc=3

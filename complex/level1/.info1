@@ -15,8 +15,6 @@ motd=Cão Raposa:
 
 [Users]
 cadelaraposa=derf
-admin=senha
-diretor=atlantis
 
 [Objectives]
 cd atlantis=1

@@ -1,0 +1,10 @@
+[General]
+user=cadelaraposa
+motd=Você precisa copiar o conteudo da pasta diretoria para seu pendrive.
+
+[Users]
+cadelaraposa=derf
+diretor=PenaDilma
+
+[Objectives]
+filecheck pendrive/PPPPE.mail=1

@@ -17,6 +17,8 @@ class Game:
     self.basedir = os.path.abspath(os.path.join(renpy.config.basedir, 'complex', basedir))
     self.curdir = ''
     self.mode = mode
+    self.filecheck = []
+    self.nfilecheck = []
     
     self.users = []
     self.objectives = []
@@ -28,7 +30,7 @@ class Game:
     sys.stdout = self.stdout = pygtext.Pygfile(self.font, parent=self)      
     self.terminal = cli.Cli(self)
     
-  def loadconf(self):
+  def loadconf(self, init=False):
     # carrega arquivo .info da pasta
     path = os.path.join(self.basedir, self.curdir, '.info'+self.mode)
     self.objectives = []
@@ -36,7 +38,7 @@ class Game:
       config = configparser.ConfigParser()
       config.readfp(codecs.open(path, "r", "utf8"))
       if config.has_section('General'):
-        if config.has_option('General', 'user'): self.player = config.get('General', 'user')
+        if init == True and config.has_option('General', 'user'): self.player = config.get('General', 'user')
         if config.has_option('General', 'motd'): print(config.get('General', 'motd').encode('UTF-8'))
       #if reset == True: self.users = []
       if config.has_section('Users'):
@@ -45,7 +47,10 @@ class Game:
           self.users = self.users + [ [ u, config.get('Users', u) ] ]
       if config.has_section('Objectives'):
         for u in config.options('Objectives'):
-          self.objectives = self.objectives + [ [ u, config.get('Objectives', u) ] ]
+          cmd = u.split(' ')
+          if cmd[0] == 'filecheck': self.filecheck = [ cmd[1], config.get('Objectives', u) ]
+          elif cmd[0] == 'nfilecheck': self.nfilecheck = [ cmd[1], config.get('Objectives', u) ]
+          else: self.objectives = self.objectives + [ [ u, config.get('Objectives', u) ] ]
   
   def slowtext(self, text):
     self.stdout.prompt_enable = False
@@ -65,7 +70,7 @@ class Game:
     self.cursor_state = True
     pygame.time.set_timer(USEREVENT_BLINK_CURSOR, 500)
     
-    self.loadconf()
+    self.loadconf(True)
 
     while True:
       # watch for events

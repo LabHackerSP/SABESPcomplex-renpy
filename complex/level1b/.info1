@@ -1,0 +1,10 @@
+[General]
+user=cadelaraposa
+motd=Você precisa mover o arquivo precrise2010.doc para seu pendrive.
+
+[Users]
+cadelaraposa=derf
+
+[Objectives]
+nfilecheck relatorios/precrise2010.doc=2
+filecheck pendrive/precrise2010.doc=1

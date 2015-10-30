@@ -63,6 +63,19 @@ class Cli:
       function(inp)
     else:
       function(args)
+      
+    #filecheck
+    if len(self.parent.filecheck) > 0:
+      print(self.parent.filecheck)
+      if os.path.exists(os.path.join(self.parent.basedir, self.parent.filecheck[0])):
+        event = pygame.event.Event(USEREVENT_CUSTOM_QUIT, code=self.parent.filecheck[1])
+        pygame.event.post(event)
+        
+    #nfilecheck
+    if len(self.parent.nfilecheck) > 0:
+      if not os.path.exists(os.path.join(self.parent.basedir, self.parent.nfilecheck[0])):
+        event = pygame.event.Event(USEREVENT_CUSTOM_QUIT, code=self.parent.nfilecheck[1])
+        pygame.event.post(event)
   
   # recebe evento pygame e atualiza entrada de texto
   def updateinput(self, events):
@@ -88,9 +101,11 @@ class Cli:
           # ctrl-c clears input line
           if event.key == K_c: self.value = ''
         elif event.mod & KMOD_SHIFT:
-          if event.key in range(32,126): self.value += chr(event.key).translate(self.table).upper()
+          if event.key == ord(';'): self.value += '?'
+          elif event.key in range(32,126): self.value += chr(event.key).translate(self.table).upper()
         else:
-          if event.key in range(32,126): self.value += chr(event.key)
+          if event.key == ord(';'): self.value += '/'
+          elif event.key in range(32,126): self.value += chr(event.key)
     #if len(self.value) > self.maxlength and self.maxlength >= 0: self.value = self.value[:-1]
     
 class Login(Cli): #prompt de login
@@ -148,9 +163,22 @@ class Parser(object):
         
   # comando de login
   def do_login(self, args):
-    if(args.length > 0):
+    if(len(args) > 0):
       inp = Login(self.game, self.parent, args[0])
       self.game.terminal = inp
+      
+  # help
+  def do_help(self, args):
+    print("ls - lista os arquivos e diretórios")
+    print("cd - muda o diretório")
+    print("cat - abre um arquivo")
+    print("motd - repete a mensagem inicial")
+    print("login - entra como outro usuário")
+    print("exit - sai do terminal")
+    
+  def do_motd(self, args):
+    #porco
+    self.game.loadconf()
   
   def emptyline(self, args):
     pass
@@ -161,6 +189,6 @@ class Parser(object):
 #      output = subprocess.check_output(line, shell=True, timeout=2, stderr=subprocess.STDOUT, cwd=self.parent.makepath(absolute=True))
       output = subprocess.check_output(line, shell=True, stderr=subprocess.STDOUT, cwd=self.parent.makepath(absolute=True))
     except subprocess.CalledProcessError as exc:
-      print(exc.output.decode('UTF-8'))
+      print(exc.output)#.decode('UTF-8'))
     else:
-      print(output.decode('UTF-8'))
+      print(output)#.decode('UTF-8'))
