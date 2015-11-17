@@ -8,7 +8,9 @@ define a = Character('Assessor de Imprensa', color="#c8f367")
 define f = Character('Fred', color="#c8ffc8")
 define n = Character('Narrador', color="#c8ffc8")
 define c = Character('Cão Raposa', color="#f8c8ff")
-define p = Character('Homens de Terno', color="#c84fc8")
+define p = Character('Homem de Terno 1', color="#c84fc8")
+define p2 = Character('Homem de Terno 2', color="#c84fc8")
+define p3 = Character('Homem de Terno 3', color="#c84fc8")
 define e = Character('Editor', color="#c80fc8")
 
 init:
