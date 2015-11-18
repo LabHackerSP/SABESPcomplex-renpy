@@ -107,7 +107,7 @@ label conversa:
 
   f "Sim."
 
-  scene bg laptop2
+  #scene bg laptop2
   
   c "Ele está conectado ao sistema interno deles. Eu só tenho acesso como usuário, preciso acessar como administrador. Mas já tem muita coisa, vamos denunciar esses fdps. Vai lá discretamente, senta e faz login. Dá uma fuçada. Tem um monte de documento,  eu não sei o que pode te ajudar. Dá uma olhada, alguma coisa vai servir pra você."
 
@@ -184,16 +184,16 @@ label term_level1c:
   return
   
 label movido:
-  "Ih, merda, ao mover ficou um buraco. Não dá para excluir o arquivo deles, é um rastro muito óbvio. Mover era o comando errado, agora você precisa copiar o arquivo de volta para a pasta original ou alguém vai perceber."
+  n "Ih, merda, ao mover ficou um buraco. Não dá para excluir o arquivo deles, é um rastro muito óbvio. Mover era o comando errado, agora você precisa copiar o arquivo de volta para a pasta original ou alguém vai perceber."
   jump movido
   
 label movido2:
-  "Você tirou o arquivo do seu pendrive... tenta mais uma vez, vai."
+  n "Você tirou o arquivo do seu pendrive... tenta mais uma vez, vai."
   jump movido2
   
 label copiado:
   $ button_show = False
-  "Pronto, com esse arquivo copiado você já consegue colocar o dedo na cara da Sabesp e exigir respostas sobre esses 85 milhões. É o suficiente. Se você quiser sair e escapar de qualquer problema possível, faça logout no sistema. Mas por outro lado, você tem a sensação de que perdeu alguma pista em algum lugar."
+  n "Pronto, com esse arquivo copiado você já consegue colocar o dedo na cara da Sabesp e exigir respostas sobre esses 85 milhões. É o suficiente. Se você quiser sair e escapar de qualquer problema possível, faça logout no sistema. Mas por outro lado, você tem a sensação de que perdeu alguma pista em algum lugar."
   
   menu:
     "Log out e matéria dedo na cara":
@@ -212,12 +212,7 @@ label level1d:
   n "Tem alguma pista no arquivo de precrise sobre a senha da diretoria. Leia de novo.."
   jump level1d
         
-label continua1d:
-    menu:
-      "Log out e matéria dedo na cara":
-        jump go2_materia
-      "Descobrir a senha":
-        jump level1d
+#label continua1d:
 
 label term_level1d:
   python:
@@ -225,7 +220,12 @@ label term_level1d:
     ret = terminal.main()
   
   if ret == 0:
-    jump continua1d
+    #jump continua1d
+    menu:
+      "Log out e matéria dedo na cara":
+        jump go2_materia
+      "Descobrir a senha":
+        jump level1d
 
   if ret == 1:
     $ button_show = False
@@ -303,7 +303,7 @@ label go4_folha:
   p2 "Não conhece a hashtag #podemostirarseacharmelhor?"
   p3 "Shh, não conversem com os mortos"
    
-  "Seu corpo nunca é encontrado. Os peixes da represa Guarapiranga começam comendo as partes moles do seu rosto. Um fenômeno estranho faz com que um cardume especialmente voraz de manjubinhaa coma a sua pele da bochecha num padrão de mordidas que desenha sua pele, parece, espera, é isso, parece que na sua bochecha esquerda elas escreveram, com os dentes, as palavras GAME OVER."
+  n "Seu corpo nunca é encontrado. Os peixes da represa Guarapiranga começam comendo as partes moles do seu rosto. Um fenômeno estranho faz com que um cardume especialmente voraz de manjubinhaa coma a sua pele da bochecha num padrão de mordidas que desenha sua pele, parece, espera, é isso, parece que na sua bochecha esquerda elas escreveram, com os dentes, as palavras GAME OVER."
   $ renpy.full_restart()
 
 label go5_publica:

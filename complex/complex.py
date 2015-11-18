@@ -13,8 +13,9 @@ USEREVENT_CUSTOM_QUIT = USEREVENT+1
 
 class Game:
   def __init__(self, basedir='sabesp', mode=''):
-    # pasta base da fase, default para sabesp
+    # pasta base (root) da fase, default para sabesp
     self.basedir = os.path.abspath(os.path.join(renpy.config.basedir, 'complex', basedir))
+    # pasta virtual, subdiretório da base
     self.curdir = ''
     self.mode = mode
     self.filecheck = []
@@ -26,32 +27,42 @@ class Game:
     pygame.init()
     self.font = pygame.font.SysFont('monospace', 24)
 
-    # modulos    
+    # modulos
     sys.stdout = self.stdout = pygtext.Pygfile(self.font, parent=self)      
     self.terminal = cli.Cli(self)
     
+  # carrega arquivo .info da pasta
   def loadconf(self, init=False):
-    # carrega arquivo .info da pasta
+    # procura arquivo .info# na pasta virtual atual onde # é o mode passado ao init
     path = os.path.join(self.basedir, self.curdir, '.info'+self.mode)
+    
     self.objectives = []
     if os.path.exists(path):
       config = configparser.ConfigParser()
       config.readfp(codecs.open(path, "r", "utf8"))
       if config.has_section('General'):
+        # usuário inicial da fase
         if init == True and config.has_option('General', 'user'): self.player = config.get('General', 'user')
+        # MOTD da pasta
         if config.has_option('General', 'motd'): print(config.get('General', 'motd').encode('UTF-8'))
       #if reset == True: self.users = []
       if config.has_section('Users'):
         self.users = []
         for u in config.options('Users'):
+          # lista de usuários para comando login
           self.users = self.users + [ [ u, config.get('Users', u) ] ]
       if config.has_section('Objectives'):
+        # objetivos que retornam exit values
         for u in config.options('Objectives'):
           cmd = u.split(' ')
+          # existência de arquivo
           if cmd[0] == 'filecheck': self.filecheck = [ cmd[1], config.get('Objectives', u) ]
+          # não-existência de arquivo
           elif cmd[0] == 'nfilecheck': self.nfilecheck = [ cmd[1], config.get('Objectives', u) ]
+          # comando digitado no terminal
           else: self.objectives = self.objectives + [ [ u, config.get('Objectives', u) ] ]
   
+  # comando de texto escrito lentamente
   def slowtext(self, text):
     self.stdout.prompt_enable = False
     for c in text:
@@ -73,17 +84,18 @@ class Game:
     self.loadconf(True)
 
     while True:
-      # watch for events
+      # escutar eventos pygame
       events = pygame.event.get()
       for event in events:
         if event.type == QUIT:
           return 0
-        elif event.type == USEREVENT_CUSTOM_QUIT:
+        elif event.type == USEREVENT_CUSTOM_QUIT: # usado para objetivos
           return int(event.code)
-        elif event.type == USEREVENT_BLINK_CURSOR:
+        elif event.type == USEREVENT_BLINK_CURSOR: # cursor piscante
           self.terminal.cursor = '_' if self.cursor_state else ' '
           self.cursor_state = not self.cursor_state
       self.terminal.updateinput(events)
+      # processo de blitting da imagem
       # clear the image to black
       self.screen.fill((0,0,0))
       # show it on the screen

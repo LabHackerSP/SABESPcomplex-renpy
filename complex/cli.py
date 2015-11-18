@@ -8,13 +8,13 @@ USEREVENT_CUSTOM_QUIT = USEREVENT+1
 
 class Cli:
   def __init__(self, parent=None):
-    self.parent = parent
-    sys.stdout = parent.stdout
-    self.cmdbuf = []
+    self.parent = parent       # objeto do jogo, usado para calls
+    sys.stdout = parent.stdout # imita stdout do objeto pai
+    self.cmdbuf = []           # buffer de comandos executados
     self.cmdbuf_index = 0
-    self.prompt = '> '
-    self.value = ''
-    self.parser = Parser(self)
+    self.prompt = '> '         # prompt do terminal
+    self.value = ''            # variável que guarda texto digitado no terminal
+    self.parser = Parser(self) # objeto do parser de comandos
     
     # transformação para shift
     inkey   = '123457890-=/;\'[]\\'
@@ -32,7 +32,7 @@ class Cli:
   def makepath(self, path='', absolute=False):
     return os.path.normpath(os.path.join(self.parent.basedir if absolute else '', self.parent.curdir, path))
     
-  # muda pasta atual
+  # muda pasta (virtual) atual
   def chpath(self, path):
     tgtdir = os.path.normpath(os.path.join(self.parent.curdir, path))
     if os.path.isdir(os.path.join(self.parent.basedir, tgtdir)):
@@ -59,19 +59,20 @@ class Cli:
     except:
       #print('Comando não reconhecido')
       # se o comando não existe no parser, manda pro shell
+      # inserir whitelist aqui
       function = getattr(self.parser, 'shell')
       function(inp)
     else:
       function(args)
       
-    #filecheck
+    #filecheck checa se arquivo existe
     if len(self.parent.filecheck) > 0:
       print(self.parent.filecheck)
       if os.path.exists(os.path.join(self.parent.basedir, self.parent.filecheck[0])):
         event = pygame.event.Event(USEREVENT_CUSTOM_QUIT, code=self.parent.filecheck[1])
         pygame.event.post(event)
         
-    #nfilecheck
+    #nfilecheck checa se arquivo não existe
     if len(self.parent.nfilecheck) > 0:
       if not os.path.exists(os.path.join(self.parent.basedir, self.parent.nfilecheck[0])):
         event = pygame.event.Event(USEREVENT_CUSTOM_QUIT, code=self.parent.nfilecheck[1])
@@ -114,6 +115,7 @@ class Login(Cli): #prompt de login
     self.login = login
     self.old_cli = old_cli
   
+  # substitui prompt
   def makeprompt(self, cursor):
     return "Senha: " + ('_' if cursor else ' ')
     
@@ -121,14 +123,14 @@ class Login(Cli): #prompt de login
     self.parent.terminal = self.old_cli #volta para prompt quando função retornar
     for u in self.parent.users:
       if self.login == u[0] and inp == u[1]:
-        self.parent.player = u[0]
+        self.parent.player = u[0] # se correto, muda usuário do jogo
         return
     print('Usuário ou senha incorretas!')
     
 class Parser(object):
   def __init__(self, parent=None):
-    self.parent = parent
-    self.game = self.parent.parent
+    self.parent = parent           # pai de parser é cli
+    self.game = self.parent.parent # pai de cli é objeto do jogo
   
   def do_exit(self, args):
     pygame.event.post(pygame.event.Event(pygame.QUIT))
@@ -139,7 +141,7 @@ class Parser(object):
     self.game.slowtext(' '.join(args) + '\n')
   
   #change directory
-  #checa por .pass dentro do diretório para 'senha'
+  #checa por .lock dentro do diretório para qual usuário pode entrar na pasta
   def do_cd(self, args):
     if len(args) < 1:
       #implementar cd sem argumento
@@ -164,7 +166,7 @@ class Parser(object):
   # comando de login
   def do_login(self, args):
     if(len(args) > 0):
-      inp = Login(self.game, self.parent, args[0])
+      inp = Login(self.game, self.parent, args[0]) # roda um outro CLI em baixo pra mudar o prompt
       self.game.terminal = inp
       
   # help
@@ -184,6 +186,7 @@ class Parser(object):
     pass
     
   # manda comando como shell
+  # falta whitelist
   def shell(self, line):
     try:
 #      output = subprocess.check_output(line, shell=True, timeout=2, stderr=subprocess.STDOUT, cwd=self.parent.makepath(absolute=True))
