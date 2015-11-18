@@ -17,6 +17,7 @@ class Game:
     self.basedir = os.path.abspath(os.path.join(renpy.config.basedir, 'complex', basedir))
     # pasta virtual, subdiretório da base
     self.curdir = ''
+    self.events = ''
     self.mode = mode
     self.filecheck = []
     self.nfilecheck = []
@@ -85,8 +86,8 @@ class Game:
 
     while True:
       # escutar eventos pygame
-      events = pygame.event.get()
-      for event in events:
+      self.events = pygame.event.get()
+      for event in self.events:
         if event.type == QUIT:
           return 0
         elif event.type == USEREVENT_CUSTOM_QUIT: # usado para objetivos
@@ -94,7 +95,7 @@ class Game:
         elif event.type == USEREVENT_BLINK_CURSOR: # cursor piscante
           self.terminal.cursor = '_' if self.cursor_state else ' '
           self.cursor_state = not self.cursor_state
-      self.terminal.updateinput(events)
+      self.terminal.updateinput(self.events)
       # processo de blitting da imagem
       # clear the image to black
       self.screen.fill((0,0,0))

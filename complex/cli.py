@@ -41,13 +41,7 @@ class Cli:
       raise
   
   # chama comando do parser
-  def parse(self, inp):
-    #checa se é objetivo
-    for u in self.parent.objectives:
-      if " ".join(inp.split()) == u[0]: #ignora espaços repetidos
-        event = pygame.event.Event(USEREVENT_CUSTOM_QUIT, code=u[1])
-        pygame.event.post(event)
-    
+  def parse(self, inp):    
     #parsing normal
     spl = inp.split(' ')
     command = spl[0]
@@ -64,6 +58,13 @@ class Cli:
       function(inp)
     else:
       function(args)
+      
+    #checa se é objetivo
+    for u in self.parent.objectives:
+      if " ".join(inp.split()) == u[0]: #ignora espaços repetidos
+        # u[0] = string alvo
+        # u[1] = código de saída
+        self.parent.terminal = AnyKey(self.parent, self, u[1]) # cli falsa que segura até pressionar qualquer tecla
       
     #filecheck checa se arquivo existe
     if len(self.parent.filecheck) > 0:
@@ -109,9 +110,27 @@ class Cli:
           elif event.key in range(32,126): self.value += chr(event.key)
     #if len(self.value) > self.maxlength and self.maxlength >= 0: self.value = self.value[:-1]
     
-class Login(Cli): #prompt de login
-  def __init__(self, parent, old_cli, login):
+class AnyKey(Cli): # prompt que espera qualquer tecla
+  def __init__(self, parent, old_cli, event):
     Cli.__init__(self, parent)
+    self.old_cli = old_cli
+    pygame.event.clear() # limpa eventos pra não pegar enter anterior
+    self.event = pygame.event.Event(USEREVENT_CUSTOM_QUIT, code=event)
+    
+  # mensagem de qualquer tecla
+  def makeprompt(self, cursor):
+    return "Pressione qualquer tecla..."
+    
+  def updateinput(self, events):
+    for event in events:
+      if event.type == KEYDOWN:
+        self.parent.terminal = self.old_cli #volta para prompt quando função retornar
+        pygame.event.post(self.event)
+        return
+
+class Login(Cli): # prompt de login, deriva de CLI
+  def __init__(self, parent, old_cli, login):
+    Cli.__init__(self, parent) # executa init padrão de CLI
     self.login = login
     self.old_cli = old_cli
   
