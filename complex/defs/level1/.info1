@@ -1,0 +1,17 @@
+[General]
+user=cadelaraposa
+motd=Cão Raposa: 
+  Isso cara, boa! Você está no terminal, o método mais comum para interagir com um terminal de servidor Linux.
+  
+  No terminal, tudo é ou arquivo ou diretório. Diretórios contém arquivos e outros diretórios, arquivos contém informações ou executam processos. Dá uma fuçada. Começa escrevendo help para ver os comandos possíveis em cada etapa desse jogo.
+   
+  Deve ter uma meia hora até a coletiva acabar. Melhor fazer render. Que horas são agora? Olhe para o relógio, você tem apenas meia hora para resolver esse jogo.
+
+  Comece usando o help, ele vai lista os comandos que você precisa saber para continuar. 
+
+  Comandos dizem ao computador o que fazer. Eles operam o sistema. Os mais simples são o ls - que lista tudo que você pode acessar, o cd - que te leva para outro diretório, o cat, que abre um arquivo ou executa uma função. Se quiser ler essa mensagem de novo, motd é o que você precisa. motd quer dizer message of the day, então, bom dia =)
+
+  Você olhou no relógio? Agora deve faltar só 29:30 para completar esse desafio
+
+[Users]
+cadelaraposa=derf

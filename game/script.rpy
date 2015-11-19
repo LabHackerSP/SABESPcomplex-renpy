@@ -152,9 +152,9 @@ label term_level1a:
     
     python:
       pygame.init()
-      terminal = complex.Game('level1b','1')
+      terminal = complex.Game('level1','2')
 #      terminal.mode = '2'
-      terminal_label = 'term_level1c'
+      terminal_label = 'term_level1b'
       button_show = True
       
     jump level1b
@@ -165,7 +165,7 @@ label level1b:
   n "Você sabe que precisa copiar este arquivo e não tem ninguém para te ensinar. A ansiedade começa a crescer e você quase desespera, mas sente o peso do seu telefone no bolso e se lembra do google. Você abre o celular e pesquisa. Agora te vira, negão, negona. Você precisa aprender o comando necessário para mover um arquivo."
   jump level1b
   
-label term_level1c:
+label term_level1b:
   python:
     pygame.init()
     ret = terminal.main()
@@ -174,11 +174,11 @@ label term_level1c:
     jump copiado
     
   if ret == 2:
-    $ terminal.mode = '2'
+    $ terminal.mode = '2b'
     jump movido
     
   if ret == 3:
-    $ terminal.mode = '1'
+    $ terminal.mode = '2'
     jump movido2
       
   return
@@ -202,19 +202,19 @@ label copiado:
       # terminal 3
       python:
         pygame.init()
-        terminal = complex.Game('level1b','3')
+        terminal = complex.Game('level1','3')
         #terminal.mode = '3'
-        terminal_label = 'term_level1d'
+        terminal_label = 'term_level1c'
         button_show = True
       jump level1d
       
-label level1d:
+label level1c:
   n "Tem alguma pista no arquivo de precrise sobre a senha da diretoria. Leia de novo.."
-  jump level1d
+  jump level1c
         
-#label continua1d:
+#label continua1c:
 
-label term_level1d:
+label term_level1c:
   python:
     pygame.init()
     ret = terminal.main()
@@ -225,7 +225,7 @@ label term_level1d:
       "Log out e matéria dedo na cara":
         jump go2_materia
       "Descobrir a senha":
-        jump level1d
+        jump level1c
 
   if ret == 1:
     $ button_show = False
