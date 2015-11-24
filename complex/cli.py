@@ -66,17 +66,17 @@ class Cli:
         # u[1] = código de saída
         self.parent.terminal = AnyKey(self.parent, self, u[1]) # cli falsa que segura até pressionar qualquer tecla
       
-    #filecheck checa se arquivo existe
-    if len(self.parent.filecheck) > 0:
-      print(self.parent.filecheck)
-      if os.path.exists(os.path.join(self.parent.basedir, self.parent.filecheck[0])):
-        event = pygame.event.Event(USEREVENT_CUSTOM_QUIT, code=self.parent.filecheck[1])
-        pygame.event.post(event)
-        
     #nfilecheck checa se arquivo não existe
     if len(self.parent.nfilecheck) > 0:
       if not os.path.exists(os.path.join(self.parent.basedir, self.parent.nfilecheck[0])):
         event = pygame.event.Event(USEREVENT_CUSTOM_QUIT, code=self.parent.nfilecheck[1])
+        pygame.event.post(event)
+      
+    #filecheck checa se arquivo existe
+    if len(self.parent.filecheck) > 0:
+      #print(self.parent.filecheck) # debug
+      if os.path.exists(os.path.join(self.parent.basedir, self.parent.filecheck[0])):
+        event = pygame.event.Event(USEREVENT_CUSTOM_QUIT, code=self.parent.filecheck[1])
         pygame.event.post(event)
   
   # recebe evento pygame e atualiza entrada de texto

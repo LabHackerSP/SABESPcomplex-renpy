@@ -2,8 +2,9 @@
 
 from renpygame.locals import *
 import renpygame as pygame
-import sys, os, string, renpy, codecs
+import sys, os, string, renpy, codecs, subprocess
 from backports import configparser
+
 # local
 import cli, pygtext
 
@@ -14,7 +15,8 @@ USEREVENT_CUSTOM_QUIT = USEREVENT+1
 class Game:
   def __init__(self, basedir='sabesp', mode=''):
     # pasta base (root) da fase, default para sabesp
-    self.basedir = os.path.abspath(os.path.join(renpy.config.basedir, 'complex', basedir))
+    self.gamedir = os.path.abspath(os.path.join(renpy.config.basedir, 'complex'))
+    self.basedir = os.path.abspath(os.path.join(self.gamedir, basedir))
     # pasta virtual, subdiretório da base
     self.curdir = ''
     self.events = ''
@@ -39,7 +41,7 @@ class Game:
     
     self.objectives = []
     if os.path.exists(path):
-      config = configparser.ConfigParser()
+      config = configparser.ConfigParser(allow_no_value=True)
       config.readfp(codecs.open(path, "r", "utf8"))
       if config.has_section('General'):
         # usuário inicial da fase
@@ -62,6 +64,13 @@ class Game:
           elif cmd[0] == 'nfilecheck': self.nfilecheck = [ cmd[1], config.get('Objectives', u) ]
           # comando digitado no terminal
           else: self.objectives = self.objectives + [ [ u, config.get('Objectives', u) ] ]
+      if init == True:
+        # seção init contém comandos executados na primeira vez que a configuração for carregada
+        if config.has_section('Init'):
+          for i in config.options('Init'):
+            cmd = i.split(' ') #separa comando e argumentos
+            subprocess.call(cmd, cwd=self.gamedir)
+            
   
   # comando de texto escrito lentamente
   def slowtext(self, text):

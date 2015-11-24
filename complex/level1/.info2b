@@ -6,5 +6,5 @@ motd=Você precisa copiar o arquivo precrise2010.doc do seu pendrive de volta pa
 cadelaraposa=derf
 
 [Objectives]
-filecheck relatorios/precrise2010.doc=1
 nfilecheck pendrive/precrise2010.doc=3
+filecheck relatorios/precrise2010.doc=1

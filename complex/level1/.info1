@@ -15,3 +15,7 @@ motd=Cão Raposa:
 
 [Users]
 cadelaraposa=derf
+
+[Init]
+rm -rf level1
+cp -r defs/level1 level1
