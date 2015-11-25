@@ -206,7 +206,7 @@ label copiado:
         #terminal.mode = '3'
         terminal_label = 'term_level1c'
         button_show = True
-      jump level1d
+      jump level1c
       
 label level1c:
   n "Tem alguma pista no arquivo de precrise sobre a senha da diretoria. Leia de novo.."

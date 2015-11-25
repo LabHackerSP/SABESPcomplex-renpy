@@ -21,11 +21,12 @@ class Game:
     self.curdir = ''
     self.events = ''
     self.mode = mode
-    self.filecheck = []
-    self.nfilecheck = []
     
     self.users = []
     self.objectives = []
+    self.filecheck = []
+    self.nfilecheck = []
+    self.whitelist = []
 
     pygame.init()
     self.font = pygame.font.SysFont('monospace', 24)
@@ -33,6 +34,14 @@ class Game:
     # modulos
     sys.stdout = self.stdout = pygtext.Pygfile(self.font, parent=self)      
     self.terminal = cli.Cli(self)
+  
+  def loadwhitelist(self):
+    # procura arquivo de whitelist de comandos
+    path = os.path.join(self.basedir, self.curdir, '.whitelist')
+    
+    if os.path.exists(path):
+      with open(path) as f:
+        self.whitelist = f.read().splitlines()
     
   # carrega arquivo .info da pasta
   def loadconf(self, init=False):
@@ -92,6 +101,7 @@ class Game:
     pygame.time.set_timer(USEREVENT_BLINK_CURSOR, 500)
     
     self.loadconf(True)
+    self.loadwhitelist()
 
     while True:
       # escutar eventos pygame

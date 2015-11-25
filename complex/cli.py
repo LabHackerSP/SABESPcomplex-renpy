@@ -190,12 +190,13 @@ class Parser(object):
       
   # help
   def do_help(self, args):
-    print("ls - lista os arquivos e diretórios")
-    print("cd - muda o diretório")
-    print("cat - abre um arquivo")
-    print("motd - repete a mensagem inicial")
-    print("login - entra como outro usuário")
-    print("exit - sai do terminal")
+    print('ls - lista os arquivos e diretórios')
+    print('cd - muda o diretório')
+    print('cat - abre um arquivo')
+    print('motd - repete a mensagem inicial')
+    print('login - entra como outro usuário')
+    print('exit - sai do terminal')
+    print('')
     
   def do_motd(self, args):
     #porco
@@ -205,12 +206,16 @@ class Parser(object):
     pass
     
   # manda comando como shell
-  # falta whitelist
   def shell(self, line):
-    try:
-#      output = subprocess.check_output(line, shell=True, timeout=2, stderr=subprocess.STDOUT, cwd=self.parent.makepath(absolute=True))
-      output = subprocess.check_output(line, shell=True, stderr=subprocess.STDOUT, cwd=self.parent.makepath(absolute=True))
-    except subprocess.CalledProcessError as exc:
-      print(exc.output)#.decode('UTF-8'))
+    cmd = line.split(' ')
+    if cmd[0] in self.game.whitelist:
+      try:
+  #      output = subprocess.check_output(line, shell=True, timeout=2, stderr=subprocess.STDOUT, cwd=self.parent.makepath(absolute=True))
+        output = subprocess.check_output(line, shell=True, stderr=subprocess.STDOUT, cwd=self.parent.makepath(absolute=True))
+      except subprocess.CalledProcessError as exc:
+        print(exc.output)#.decode('UTF-8'))
+      else:
+        print(output)#.decode('UTF-8'))
     else:
-      print(output)#.decode('UTF-8'))
+      print('Comando não reconhecido')
+      print('')
