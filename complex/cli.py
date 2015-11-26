@@ -53,7 +53,6 @@ class Cli:
     except:
       #print('Comando não reconhecido')
       # se o comando não existe no parser, manda pro shell
-      # inserir whitelist aqui
       function = getattr(self.parser, 'shell')
       function(inp)
     else:

@@ -51,6 +51,7 @@ class Game:
     self.objectives = []
     if os.path.exists(path):
       config = configparser.ConfigParser(allow_no_value=True)
+      config.optionxform = str #mantém case sensitivity das linhas originais
       config.readfp(codecs.open(path, "r", "utf8"))
       if config.has_section('General'):
         # usuário inicial da fase

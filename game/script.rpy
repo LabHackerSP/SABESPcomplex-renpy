@@ -229,11 +229,11 @@ label term_level1c:
 
   if ret == 1:
     $ button_show = False
-    jump copiado2
+    jump leuemail #leu arquivo ppppe.mail da diretoria
     
   return
       
-label copiado2:
+label leuemail:
   n "Cara, você, um hacker. Rá, vamos ver agora, Sabesp. Com esse documento na mão você tem uma bela de uma matéria. E agora, acha que já tem o suficiente ou ainda vai dar um jeito de abrir aquele atlantis.dir e conhecer todos os segredos do projeto?"
   n "Você precisa decidir rápido."
   
