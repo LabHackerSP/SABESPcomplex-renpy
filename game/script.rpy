@@ -163,10 +163,9 @@ label term_level1a:
     $ button_show = False
 
     if ret == 2: #Cat no relatorio
-      n "Você achou um relatorio com informação relevante blablabla. (BRENO VAI COSTURAR)"
-      n "Atlantis? Que porra é essa?"
-      n "Você conecta seu pendrive no computador e a pasta 'pendrive' aparece na raiz do sistema."
-    
+      n "Uau. Você acompanha a cena faz algum tempo e tem certeza que Atlantis nunca foi mencionado pela Sabesp. E agora você encontra aí, 85 milhões não informados"
+      n "É hora de copiar esse arquivo você conecta seu pendrive no computador e a pasta 'pendrive' aparece na raiz do sistema."
+	  n "Não tem ninguém mais para te ajudar, só a internet. Hora de pesquisar e aprender sozinho. "	
     python:
       pygame.init()
       terminal = complex.Game('level1','2')
