@@ -13,10 +13,10 @@ USEREVENT_BLINK_CURSOR = USEREVENT
 USEREVENT_CUSTOM_QUIT = USEREVENT+1
 
 #substitui pastas com definições
-def clearGame(gamedir):
+def clearGame(gamedir, copy=True):
   basedir = os.path.abspath(os.path.join(renpy.config.basedir, 'complex'))
   shutil.rmtree(os.path.join(basedir,gamedir), ignore_errors=True)
-  shutil.copytree(os.path.join(basedir,'defs',gamedir), os.path.join(basedir,gamedir))
+  if copy == True: shutil.copytree(os.path.join(basedir,'defs',gamedir), os.path.join(basedir,gamedir))
 
 class Game:
   def __init__(self, basedir='sabesp', mode=''):

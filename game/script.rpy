@@ -45,6 +45,9 @@ init python:
     if button_show:
       ui.imagebutton("terminal_idle.png","terminal_hover.png",clicked=ui.callsinnewcontext(terminal_label),xpos=.01,ypos=.01)# or ui.jumps
   config.overlay_functions.append(overlay_button)
+  
+label quit:
+  $ complex.clearGame('level1', copy=False)
 
 # The game starts here.
 label start:
