@@ -10,7 +10,7 @@ cd - te leva para outro diretório
 cd .. - retorna ao diretório anterior
 cat - abre um arquivo ou executa uma função
 help - retoma essa ajuda
-
+exit - sai do terminal e retonar à coletiva de imprensa
 
 
 [Users]
