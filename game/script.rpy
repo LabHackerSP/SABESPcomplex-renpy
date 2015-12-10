@@ -36,6 +36,8 @@ init python:
   import pygame_sdl2 as pygame
   from complex import complex
   
+  complex.clearGame('level1')
+  
   button_show = False
   terminal_label = "terminal"
   
