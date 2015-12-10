@@ -217,5 +217,4 @@ class Parser(object):
         print("") #whitline antes do comando
         print(output)#.decode('UTF-8'))
     else:
-      print('Comando não reconhecido')
-      print('')
+      print('\nComando não reconhecido.\n')
