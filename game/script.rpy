@@ -69,18 +69,18 @@ label start:
   scene bg auditorio
   show laptop longe
 
-  n "O assessor retirou essa frase de uma das peças oficiais de publicidade da empresa, que tenta se recuperar em meio a uma das maiores crises de sua história. Sem a recuperação dos mananciais, você sabe que é uma questão de tempo até o colapso."
+  n "O assessor retirou essa frase de uma das peças oficiais de publicidade da empresa, que atravessa a maior crise de sua história. Sem a recuperação dos mananciais, você sabe que é uma questão de tempo até o colapso."
   
   scene bg imprensa
 
   a "A Sabesp investiu R$ 9,3 bilhões entre 1995 e 2013, em medidas para aumentar a segurança do abastecimento de água. Os recursos permitiram aumentar a disponibilidade de mananciais, a capacidade de produção, o transporte de água tratada..."
-  a "...e a integração entre os sistemas produtores, além de ter ampliado a capacidade de reservação e de distribuição de água à população e, importante, com redução nas perdas. No período, a capacidade de produção subiu 57,2 para 73,3 metros cúbicos por segundo."
+  a "...e a integração entre os sistemas produtores, além de ter ampliado a capacidade de reservae e distribuição de água à população e, importante, com redução nas perdas. No período, a capacidade de produção subiu 57,2 para 73,3 metros cúbicos por segundo."
   
   scene bg auditorio
   show laptop longe
   
   n "Droga. Tudo propaganda. Você sabe que esses números estão mascarados e sabe também que essas são as únicas informações que seu jornal publicaria. Enquanto ouvia, fazia anotações em seu laptop e controlava a ansiedade." 
-  n "Precisava fazer alguma coisa. Começou a abrir páginas de veículos independentes como A Pública, Outras Palavras, Jornalistas Livres, Fluxo, pesquisando atrás de mais informações sobre a falta dágua."
+  n "Precisava fazer alguma coisa. Começou a abrir páginas de veículos independentes como A Pública, Outras Palavras, Jornalistas Livres, Fluxo, pesquisando mais informações sobre a falta dágua."
   
   "Uma tela de diálogo apareceu sobre seu navegador."
 
@@ -89,7 +89,7 @@ label start:
 label navegador:
   show laptop msg
   
-  c "Cara, vou te falar, você está certo."
+  c "Cara, vou te falar, você está certo em procurar essa galera."
   n "Que merda é essa?"
   n "Fui hackeado."
   c "Fred. Fica calmo. Eu vim falar com você. Me escuta. É sobre a Sabesp."
@@ -127,7 +127,8 @@ label conversa:
 
   #scene bg laptop2
   
-  c "Ele está conectado ao sistema interno deles. Eu só tenho acesso como usuário, preciso acessar como administrador. Mas já tem muita coisa, vamos denunciar esses fdps. Vai lá discretamente, senta e faz login. Dá uma fuçada. Tem um monte de documento,  eu não sei o que pode te ajudar. Dá uma olhada, alguma coisa vai servir pra você."
+  c "Ele está conectado ao sistema interno deles. Eu tenho pouco tempo aqui, vou te dar acesso para você continuar. Tem muita coisa, vamos denunciar esses fdps. "
+  c "Vai lá discretamente, senta e faz login. Dá uma fuçada. Tem um monte de documento,  eu não sei o que pode te ajudar. Dá uma olhada, alguma coisa vai servir pra você."
 
   #chegando perto do comp
 
@@ -151,7 +152,7 @@ label login:
     
 label level1a:
   scene bg terminal prompt
-  c "É isso! Parabéns pelo seu primeiro desafio. Cara, eu preciso ir. Já estou há muito tempo aqui, uma hora ou outra os caras de preto te pegam" 
+  c "É isso! Parabéns pelo seu primeiro desafio. Cara, eu preciso ir. Já estou há muito tempo aqui, uma hora ou outra os caras de preto te encontram, fica esperto." 
   c "Está vendo este botão que apareceu ali? É o símbolo do terminal. Clique nele para acessar a etapa de programação deste jogo."
   c "Depois disso você vai estar por sua conta, boa sorte!"
   jump level1a
@@ -166,7 +167,7 @@ label term_level1a:
 
     if ret == 2: #Cat no relatorio
       n "Uau. Você acompanha a cena faz algum tempo e tem certeza que Atlantis nunca foi mencionado pela Sabesp. E agora você encontra aí, 85 milhões não informados"
-      n "É hora de copiar esse arquivo você conecta seu pendrive no computador e a pasta 'pendrive' aparece na raiz do sistema."
+      n "É hora de copiar esse arquivo, você conecta seu pendrive no computador e a pasta 'pendrive' aparece na raiz do sistema."
       
     python:
       pygame.init()
@@ -214,7 +215,8 @@ label movido2:
   
 label copiado:
   $ button_show = False
-  n "Pronto, com esse arquivo copiado você já consegue colocar o dedo na cara da Sabesp e exigir respostas sobre esses 85 milhões. É o suficiente. Se você quiser sair e escapar de qualquer problema possível, faça logout no sistema. Mas por outro lado, você tem a sensação de que perdeu alguma pista em algum lugar."
+  n "Pronto, com esse arquivo copiado você já consegue colocar o dedo na cara da Sabesp e exigir respostas sobre esses 85 milhões. É o suficiente. " 
+  n "Se você quiser sair e escapar de qualquer problema possível, faça logout no sistema. Mas por outro lado, você tem a sensação de que perdeu alguma pista em algum lugar."
   
   menu:
     "Log out e matéria dedo na cara":
@@ -258,7 +260,7 @@ label leuemail:
     terminal_label = 'term_level1d'
     button_show = True
     
-  n "leu email agora precisa copiar"
+  n "Uouououo, agora sim malandro. Promoção da escassez? Eles vão precisar responder uma outra perguntinha sobre isso.."
   
   jump leuemail
   
@@ -338,7 +340,7 @@ label go2_materia: #PUBLICACAO MATERIA APOS ACESSAR PRECRISE
   
   n "A direção da Sabesp lhe responde que Atlantis é uma pesquisa sobre alternativas para a crise hídrica. Você pede dados dessa pesquisa e recebe dados genéricos como resposta."
   n "É tudo obviamente uma farsa. Uma semana depois, você publica a matéria que é capa do caderno Cotidiano. Após a edição de seu texto por seu chefe, Atlantis é publicado como um belo programa de resgate das águas paulistas."
-  n "Naquela noite você tenta bater uma punheta antes de dormir, mas brocha um GAME OVER."
+  n "Naquela noite você tenta bater uma punheta antes de dormir, mas brocha um GAME OVER, quer dizer, um PERDEU."
   
   show perdeu
   pause
