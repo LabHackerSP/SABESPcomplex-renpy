@@ -67,3 +67,5 @@ tmp*
 # cache & save
 game/cache*
 game/save*
+
+complex/level1/*
