@@ -232,8 +232,6 @@ label copiado:
 label level1c:
   n "Tem alguma pista no arquivo de precrise sobre a senha da diretoria. Leia de novo.."
   jump level1c
-        
-#label continua1c:
 
 label term_level1c:
   python:
@@ -241,7 +239,6 @@ label term_level1c:
     ret = terminal.main()
   
   if ret == 0:
-    #jump continua1d
     menu:
       "Log out e matéria dedo na cara":
         jump go2_materia
@@ -255,6 +252,45 @@ label term_level1c:
   return
       
 label leuemail:
+  python:
+    pygame.init()
+    terminal = complex.Game('level1','4')
+    terminal_label = 'term_level1d'
+    button_show = True
+    
+  n "leu email agora precisa copiar"
+  
+  jump leuemail
+  
+label term_level1d:
+  python:
+    pygame.init()
+    ret = terminal.main()
+
+  if ret == 1:
+    jump copiouemail
+    
+  if ret == 2:
+    $ terminal.mode = '4b'
+    jump mailmovido
+    
+  if ret == 3:
+    $ terminal.mode = '4'
+    jump mailmovido2
+    
+  return
+  
+label mailmovido:
+  n "Ih, merda, ao mover ficou um buraco. Não dá para excluir o arquivo deles, é um rastro muito óbvio."
+  n "Mover era o comando errado, agora você precisa copiar o arquivo de volta para a pasta original ou alguém vai perceber."
+  jump movido
+  
+label mailmovido2:
+  n "Você tirou o arquivo do seu pendrive... tenta mais uma vez, vai."
+  jump movido2
+
+label copiouemail:
+  $ button_show = False
   n "Cara, você, um hacker. Rá, vamos ver agora, Sabesp. Com esse documento na mão você tem uma bela de uma matéria. E agora, acha que já tem o suficiente ou ainda vai dar um jeito de abrir aquele atlantis.dir e conhecer todos os segredos do projeto?"
   n "Você precisa decidir rápido."
   

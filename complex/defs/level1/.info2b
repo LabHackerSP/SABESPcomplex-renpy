@@ -1,10 +1,10 @@
 [General]
 user=cadelaraposa
-motd=Você precisa copiar o arquivo precrise2010.doc do seu pendrive de volta para relatorios.
+motd=Você precisa copiar o arquivo pre_crise_2010.txt do seu pendrive de volta para relatorios.
 
 [Users]
 cadelaraposa=derf
 
 [Objectives]
-nfilecheck pendrive/precrise2010.doc=3
-filecheck relatorios/precrise2010.doc=1
+nfilecheck pendrive/pre_crise_2010.txt=3
+filecheck relatorios/pre_crise_2010.txt=1

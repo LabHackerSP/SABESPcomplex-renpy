@@ -1,0 +1,11 @@
+[General]
+user=diretor
+motd=Você precisa copiar o arquivo ppppe.txt para seu pendrive.
+
+[Users]
+cadelaraposa=derf
+diretor=penadilma
+
+[Objectives]
+nfilecheck diretoria/ppppe.txt=2
+filecheck pendrive/ppppe.txt=1
