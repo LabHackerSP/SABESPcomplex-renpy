@@ -300,7 +300,7 @@ label go1_lapquebrado:
 label go2_materia: #PUBLICACAO MATERIA APOS ACESSAR PRECRISE
   scene bg casa fred #trocar
   
-  n "A direção da Sabesp lhe responde que Atlantis é uma pesquisa sobre alternativas para a crise hídrica. Você pede dados dessa pesquisa e recebe dados genéricos como resposta."" 
+  n "A direção da Sabesp lhe responde que Atlantis é uma pesquisa sobre alternativas para a crise hídrica. Você pede dados dessa pesquisa e recebe dados genéricos como resposta."
   n "É tudo obviamente uma farsa. Uma semana depois, você publica a matéria que é capa do caderno Cotidiano. Após a edição de seu texto por seu chefe, Atlantis é publicado como um belo programa de resgate das águas paulistas."
   n "Naquela noite você tenta bater uma punheta antes de dormir, mas brocha um GAME OVER."
   
