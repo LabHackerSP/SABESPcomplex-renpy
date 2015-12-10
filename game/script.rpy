@@ -35,9 +35,7 @@ define e = Character('Editor', color="#c80fc8")
 init python:
   import pygame_sdl2 as pygame
   from complex import complex
-  
-  complex.clearGame('level1')
-  
+    
   button_show = False
   terminal_label = "terminal"
   
@@ -51,6 +49,7 @@ label quit:
 
 # The game starts here.
 label start:
+  $ complex.clearGame('level1')
   #jump leuemail
   scene bg imprensa
 
@@ -182,7 +181,8 @@ label term_level1a:
   
 label level1b:
   n "Não tem ninguém mais para te ajudar, só a internet. Hora de pesquisar e aprender sozinho."
-  n "Você sabe que desse arquivo e não tem ninguém para te ensinar. A ansiedade começa a crescer e você quase desespera, mas sente o peso do seu telefone no bolso e se lembra do google. Você abre o celular e pesquisa. Agora te vira, negão, negona. Você precisa aprender o comando necessário para mover um arquivo."
+  n "Você sabe que desse arquivo e não tem ninguém para te ensinar. A ansiedade começa a crescer e você quase desespera, mas sente o peso do seu telefone no bolso e se lembra do google. Você abre o celular e pesquisa. Agora te vira, negão, negona." 
+  n "Você precisa aprender o comando necessário para mover um arquivo."
   jump level1b
   
 label term_level1b:
@@ -204,7 +204,8 @@ label term_level1b:
   return
   
 label movido:
-  n "Ih, merda, ao mover ficou um buraco. Não dá para excluir o arquivo deles, é um rastro muito óbvio. Mover era o comando errado, agora você precisa copiar o arquivo de volta para a pasta original ou alguém vai perceber."
+  n "Ih, merda, ao mover ficou um buraco. Não dá para excluir o arquivo deles, é um rastro muito óbvio."
+  n "Mover era o comando errado, agora você precisa copiar o arquivo de volta para a pasta original ou alguém vai perceber."
   jump movido
   
 label movido2:
@@ -299,7 +300,8 @@ label go1_lapquebrado:
 label go2_materia: #PUBLICACAO MATERIA APOS ACESSAR PRECRISE
   scene bg casa fred #trocar
   
-  n "A direção da Sabesp lhe responde que Atlantis é uma pesquisa sobre alternativas para a crise hídrica. Você pede dados dessa pesquisa e recebe dados genéricos como resposta. É tudo obviamente uma farsa. Uma semana depois, você publica a matéria que é capa do caderno Cotidiano. Após a edição de seu texto por seu chefe, Atlantis é publicado como um belo programa de resgate das águas paulistas."
+  n "A direção da Sabesp lhe responde que Atlantis é uma pesquisa sobre alternativas para a crise hídrica. Você pede dados dessa pesquisa e recebe dados genéricos como resposta."" 
+  n "É tudo obviamente uma farsa. Uma semana depois, você publica a matéria que é capa do caderno Cotidiano. Após a edição de seu texto por seu chefe, Atlantis é publicado como um belo programa de resgate das águas paulistas."
   n "Naquela noite você tenta bater uma punheta antes de dormir, mas brocha um GAME OVER."
   
   show perdeu
