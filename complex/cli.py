@@ -214,6 +214,7 @@ class Parser(object):
       except subprocess.CalledProcessError as exc:
         print(exc.output)#.decode('UTF-8'))
       else:
+        print("") #whitline antes do comando
         print(output)#.decode('UTF-8'))
     else:
       print('Comando não reconhecido')
