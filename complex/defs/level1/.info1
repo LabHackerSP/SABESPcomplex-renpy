@@ -1,15 +1,15 @@
 [General]
 user=cadelaraposa
 motd=Cão Raposa: 
-HELP
+  HELP
 
-comandos disponíveis >
+  comandos disponíveis >
 
-ls - lista tudo que você pode acessar
-cd - te leva para outro diretório
-cd .. - retorna ao diretório anterior
-cat - abre um arquivo ou executa uma função
-help - retoma essa ajuda
+  ls - lista tudo que você pode acessar
+  cd - te leva para outro diretório
+  cd .. - retorna ao diretório anterior
+  cat - abre um arquivo ou executa uma função
+  help - retoma essa ajuda
 
 
 
