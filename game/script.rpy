@@ -80,7 +80,8 @@ label start:
   scene bg auditorio
   show laptop longe
   
-  n "Droga. Tudo propaganda. Você sabe que esses números estão mascarados e sabe também que seu jornal nunca publicaria essas informações. Enquanto ouvia, fazia anotações em seu laptop e controlava a ansiedade. Precisava fazer alguma coisa. Começou a abrir páginas de veículos independentes como A Pública, Outras Palavras, Jornalistas Livres, Fluxo, pesquisando atrás de mais informações sobre a falta dágua."
+  n "Droga. Tudo propaganda. Você sabe que esses números estão mascarados e sabe também que essas são as únicas informações que seu jornal publicaria. Enquanto ouvia, fazia anotações em seu laptop e controlava a ansiedade." 
+  n "Precisava fazer alguma coisa. Começou a abrir páginas de veículos independentes como A Pública, Outras Palavras, Jornalistas Livres, Fluxo, pesquisando atrás de mais informações sobre a falta dágua."
   
   "Uma tela de diálogo apareceu sobre seu navegador."
 
@@ -131,7 +132,7 @@ label conversa:
 
   #chegando perto do comp
 
-  n "Você tropeça em alguém e se desculpa, está nervoso"
+  n "Você tropeça em alguém e se desculpa, está nervoso. Finalmente, chega até o computador."
   
 label login:
   scene bg terminal login
