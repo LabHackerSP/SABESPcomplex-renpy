@@ -166,7 +166,7 @@ label term_level1a:
     if ret == 2: #Cat no relatorio
       n "Uau. Você acompanha a cena faz algum tempo e tem certeza que Atlantis nunca foi mencionado pela Sabesp. E agora você encontra aí, 85 milhões não informados"
       n "É hora de copiar esse arquivo você conecta seu pendrive no computador e a pasta 'pendrive' aparece na raiz do sistema."
-	  n "Não tem ninguém mais para te ajudar, só a internet. Hora de pesquisar e aprender sozinho. "	
+      n "Não tem ninguém mais para te ajudar, só a internet. Hora de pesquisar e aprender sozinho. "	
     python:
       pygame.init()
       terminal = complex.Game('level1','2')
