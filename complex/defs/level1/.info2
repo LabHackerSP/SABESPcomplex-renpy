@@ -6,8 +6,8 @@ motd=Você precisa mover o arquivo precrise2010.doc para seu pendrive.
 cadelaraposa=derf
 
 [Objectives]
-nfilecheck relatorios/precrise2010.doc=2
-filecheck pendrive/precrise2010.doc=1
+nfilecheck relatorios/pre_crise_2010.txt=2
+filecheck pendrive/pre_crise_2010.txt=1
 
 [Init]
 mkdir level1/pendrive

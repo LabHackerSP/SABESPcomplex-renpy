@@ -152,7 +152,9 @@ label login:
     
 label level1a:
   scene bg terminal prompt
-  c "É isso! Você conseguiu seu primeiro desafio. Está vendo este botão que apareceu ali? É o símbolo do terminal. Clique nele para acessar a etapa de programação deste jogo"
+  c "É isso! Parabéns pelo seu primeiro desafio. Cara, eu preciso ir. Já estou há muito tempo aqui, uma hora ou outra os caras de preto te pegam" 
+  c "Está vendo este botão que apareceu ali? É o símbolo do terminal. Clique nele para acessar a etapa de programação deste jogo."
+  c "Depois disso você vai estar por sua conta, boa sorte!"
   jump level1a
     
 label term_level1a:
@@ -166,7 +168,7 @@ label term_level1a:
     if ret == 2: #Cat no relatorio
       n "Uau. Você acompanha a cena faz algum tempo e tem certeza que Atlantis nunca foi mencionado pela Sabesp. E agora você encontra aí, 85 milhões não informados"
       n "É hora de copiar esse arquivo você conecta seu pendrive no computador e a pasta 'pendrive' aparece na raiz do sistema."
-      n "Não tem ninguém mais para te ajudar, só a internet. Hora de pesquisar e aprender sozinho."
+      
     python:
       pygame.init()
       terminal = complex.Game('level1','2')
@@ -179,7 +181,8 @@ label term_level1a:
   return
   
 label level1b:
-  n "Você sabe que precisa copiar este arquivo e não tem ninguém para te ensinar. A ansiedade começa a crescer e você quase desespera, mas sente o peso do seu telefone no bolso e se lembra do google. Você abre o celular e pesquisa. Agora te vira, negão, negona. Você precisa aprender o comando necessário para mover um arquivo."
+  n "Não tem ninguém mais para te ajudar, só a internet. Hora de pesquisar e aprender sozinho."
+  n "Você sabe que desse arquivo e não tem ninguém para te ensinar. A ansiedade começa a crescer e você quase desespera, mas sente o peso do seu telefone no bolso e se lembra do google. Você abre o celular e pesquisa. Agora te vira, negão, negona. Você precisa aprender o comando necessário para mover um arquivo."
   jump level1b
   
 label term_level1b:
